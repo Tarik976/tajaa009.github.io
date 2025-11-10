@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pizza Tycoon!</title>
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #ffcb74, #ff7b54);
+        font-family: "Comic Sans MS", cursive, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .game-container {
+        background-color: #fff7e6;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        width: 320px;
+      }
+
+      h1 {
+        color: #d35400;
+        margin-bottom: 20px;
+      }
+
+      button {
+        background-color: #ff8c42;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+        margin: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.2s;
+      }
+
+      button:hover {
+        background-color: #e76f51;
+        transform: scale(1.05);
+      }
+
+      p {
+        font-size: 18px;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="game-container">
+      <h1>Pizza Tycoon</h1>
+
+      <p>Penger: <span id="money">100</span> kr</p>
+      <p>Pizzaer: <span id="pizzas">2</span></p>
+
+      <div class="buttons">
+        <button id="buy">Kjøp pizza (-10 kr)</button>
+        <button id="sell">Selg pizza (+15 kr)</button>
+      </div>
+
+      <button id="reset">Spill igjen</button>
+    </div>
+
+    <script>
+      let money = 100;
+      let pizzas = 2;
+
+      const moneyDisplay = document.getElementById("money");
+      const pizzaDisplay = document.getElementById("pizzas");
+      const buyButton = document.getElementById("buy");
+      const sellButton = document.getElementById("sell");
+      const resetButton = document.getElementById("reset");
+
+      buyButton.addEventListener("click", () => {
+        if (money >= 10) {
+          money -= 10;
+          pizzas++;
+          updateDisplay();
+        } else {
+          alert("Du har ikke nok penger!");
+        }
+      });
+
+      sellButton.addEventListener("click", () => {
+        if (pizzas > 0) {
+          pizzas--;
+          money += 15;
+          updateDisplay();
+        } else {
+          alert("Ingen pizzaer å selge!");
+        }
+      });
+
+      resetButton.addEventListener("click", () => {
+        money = 100;
+        pizzas = 2;
+        updateDisplay();
+      });
+
+      function updateDisplay() {
+        moneyDisplay.textContent = money;
+        pizzaDisplay.textContent = pizzas;
+      }
+    </script>
+  </body>
+</html>
